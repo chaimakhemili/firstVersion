@@ -1,30 +1,29 @@
-package com.formalab.ecommerce.model;
+package com.workshop.formationBack.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "personne")
 public class Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Column(name = "prenom", nullable = false)
     private String prenom;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
+    @Column(name = "date_de_naissance", nullable = false)
     private String dateDeNaissance;
 
-    @NotBlank
+    @Column(name = "age", nullable = false)
     private String age;
 
     public Personne() {}
@@ -74,5 +73,16 @@ public class Personne{
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Personne{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", dateDeNaissance='" + dateDeNaissance + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
