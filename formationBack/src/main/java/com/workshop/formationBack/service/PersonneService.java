@@ -1,49 +1,19 @@
 package com.workshop.formationBack.service;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import com.workshop.formationBack.model.Personne;
-import com.workshop.formationBack.repository.PersonneRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Service
-public class PersonneService {
+public interface PersonneService {
+    Personne addOrEditPersonne(Personne personne);
 
-        @Autowired
-        private PersonneRepository personnerepository;
+    void deletePersonne(Personne personne);
 
-        public boolean isPersonnePresent(Long personneId) {
-            return personnerepository.existsById(personneId);
-        }
+    UserDetails loadUserByUsername(String username);
 
-        public Personne getPersonneById(Long personneId) {
-            return personnerepository.findById(personneId).orElse(null);
-        }
+    List<Personne> getPersonnes();
 
-        public List<Personne> getPersonnes() {
-            List<Personne> personnes = new ArrayList<>();
-            Iterator<Personne> personneIterator = personnerepository.findAll().iterator();
-            while (personneIterator.hasNext()) {
-                personnes.add(personneIterator.next());
-            }
-            return personnes;
-        }
+    Optional<Personne> getPersonneById(Long personneId);
 
-        public Personne addPersonne(Personne personne) {
-            return personnerepository.save(personne);
-        }
-
-        public Personne updatePersonne(Long personneId, Personne personne) {
-            Personne personneToBeUpdated = getPersonneById(personneId);
-            personneToBeUpdated.setNom(personne.getNom());
-            return personnerepository.save(personneToBeUpdated);
-        }
-
-        public void deletePersonne(Long personneId) {
-            personnerepository.delete(getPersonneById(personneId));
-        }
-    }
-
-
+}
