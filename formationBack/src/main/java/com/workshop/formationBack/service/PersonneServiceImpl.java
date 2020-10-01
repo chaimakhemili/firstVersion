@@ -29,7 +29,6 @@ public class PersonneServiceImpl implements PersonneService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("Person Not Found with -> username : " + username)
                 );
-
         return PersonPrinciple.build(user);
     }
 

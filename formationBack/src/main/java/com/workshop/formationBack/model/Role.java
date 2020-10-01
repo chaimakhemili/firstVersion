@@ -1,6 +1,5 @@
 package com.workshop.formationBack.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
@@ -17,7 +15,7 @@ import org.hibernate.annotations.NaturalId;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "roles")
+@Table(name ="role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

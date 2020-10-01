@@ -64,7 +64,7 @@ public class PersonPrinciple implements UserDetails {
 
     @Override
     public String getUsername() {
-        return prenom;
+        return username;
     }
  
     @Override

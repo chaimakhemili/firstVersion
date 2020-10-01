@@ -2,7 +2,6 @@ package com.workshop.formationBack.model;
 
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -32,7 +31,6 @@ public class Personne{
     @Size(min=3, max = 50)
     private String username;
     private String dateDeNaissance;
-
     private String age;
 
     @NotBlank
@@ -42,25 +40,25 @@ public class Personne{
     private Boolean etat;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "personne_roles",
+            joinColumns = @JoinColumn(name = "personne_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
 
-    public Personne(String nom, String prenom, String username, String dateDeNaissance, String age, String password) {
+    public Personne(String nom, String prenom, String username, String password) {
 
         this.nom = nom;
         this.prenom = prenom;
         this.username = username;
-        this.dateDeNaissance = dateDeNaissance;
-        this.age = age;
         this.password=password;
         this.etat = false;
     }
 
     public Personne() {
+
     }
+
     public Long getId() {
         return id;
     }
