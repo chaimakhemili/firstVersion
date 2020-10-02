@@ -39,25 +39,21 @@ public class AuthRestAPIs {
     @Autowired
     JwtProvider jwtProvider;
 
-    @PostMapping("/signin")
+    @PostMapping(value = "/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
                         loginRequest.getPassword()
-
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateJwtToken(authentication);
-
         Optional<Personne> personne = personneRepository.findByUsername(loginRequest.getUsername());
         Personne personnedetails = personne.get();
-
         if(!personnedetails.getEtat()){
             return ResponseEntity.ok("Not activated");
         }
-
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
  
@@ -92,7 +88,6 @@ public class AuthRestAPIs {
         });
         personne.setRoles(roles);
         personneRepository.save(personne);
-
         return ResponseEntity.ok("Person Registred !");
     }
 }

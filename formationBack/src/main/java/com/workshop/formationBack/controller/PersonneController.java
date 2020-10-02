@@ -18,17 +18,16 @@ import org.springframework.web.bind.annotation.*;
     @CrossOrigin(origins = "*")
     public class PersonneController {
         private static Logger logger = LoggerFactory.getLogger(PersonneController.class);
-
         @Autowired
         private PersonneRepository personneRepository;
         private PersonneService personneService;
 
-        @GetMapping("/personnes")
+        @GetMapping
         public List<Personne> getAllPersonne() {
             return personneRepository.findAll();
         }
 
-        @GetMapping("{id}")
+        @GetMapping("/{id}")
         public ResponseEntity<?> findById(@PathVariable("id") Long personneId) {
             logger.debug("Retrieving  Person with id {}", personneId);
             Optional<Personne> personne = personneService.getPersonneById(personneId);
@@ -55,7 +54,7 @@ import org.springframework.web.bind.annotation.*;
 //            }
 //        }
 
-        @PutMapping("/personnes/{id}")
+      @PutMapping("/{id}")
         public ResponseEntity<Personne> updatePersonne(@PathVariable(value = "id") Long personneId, @RequestBody Personne personneDetails) throws ResourceNotFoundException {
             logger.debug("Updating User with id {}", personneId);
             Optional<Personne> currentPerson = personneService.getPersonneById(personneId);
@@ -72,7 +71,7 @@ import org.springframework.web.bind.annotation.*;
             return ResponseEntity.ok().build();
         }
 
-        @DeleteMapping("/personnes/{id}")
+        @DeleteMapping("/{id}")
         public ResponseEntity<?> deletePersonne(@PathVariable(value = "id") Long personneId) {
             Optional<Personne> personne = personneService.getPersonneById(personneId);
             try {

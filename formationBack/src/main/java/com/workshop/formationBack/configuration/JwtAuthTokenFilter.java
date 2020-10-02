@@ -1,6 +1,7 @@
 package com.workshop.formationBack.configuration;
 
 import com.workshop.formationBack.service.PersonneServiceImpl;
+import com.workshop.formationBack.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     private JwtProvider tokenProvider;
  
     @Autowired
-    private PersonneServiceImpl personneService;
- 
+//    private PersonneServiceImpl personneService;
+    private UserDetailsServiceImpl userDetailsService;
+
+
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
  
     @Override
@@ -36,7 +39,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
             String jwt = getJwt(request);
             if (jwt!=null && tokenProvider.validateJwtToken(jwt)) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
-                UserDetails userDetails = personneService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication 
                     = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

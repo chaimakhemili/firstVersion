@@ -30,7 +30,6 @@ public class PersonPrinciple implements UserDetails {
         this.nom = nom;
         this.prenom = prenom;
         this.username = username;
-        this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.etat=etat;

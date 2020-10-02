@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 
 @Component
@@ -24,7 +23,6 @@ public class JwtProvider {
     public String generateJwtToken(Authentication authentication) {
  
         PersonPrinciple personnePrincipal = (PersonPrinciple) authentication.getPrincipal();
- 
         return Jwts.builder()
                     .setSubject((personnePrincipal.getUsername()))
                     .setIssuedAt(new Date())
@@ -57,7 +55,6 @@ public class JwtProvider {
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty -> Message: {}", e);
         }
-        
         return false;
     }
 }
