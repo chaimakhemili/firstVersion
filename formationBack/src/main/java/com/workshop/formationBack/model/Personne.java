@@ -32,6 +32,9 @@ public class Personne{
     private String username;
     private String dateDeNaissance;
     private String age;
+    @ManyToOne
+    @JoinColumn
+    private Contrat contrat;
 
     @NotBlank
     @Size(min=6, max = 100)
@@ -55,9 +58,7 @@ public class Personne{
         this.etat = false;
     }
 
-    public Personne() {
-
-    }
+    public Personne() { }
 
     public Long getId() {
         return id;
@@ -126,4 +127,8 @@ public class Personne{
     public void setEtat(Boolean etat) {
         this.etat = etat;
     }
+
+    public Contrat getContrat() { return contrat; }
+
+    public void setContrat(Contrat contrat) { this.contrat = contrat; }
 }

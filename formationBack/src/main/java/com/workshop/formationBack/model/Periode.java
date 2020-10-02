@@ -7,14 +7,13 @@ import lombok.ToString;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class periode {
+public class Periode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long periodeId;
